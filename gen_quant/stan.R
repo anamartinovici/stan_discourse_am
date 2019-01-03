@@ -105,3 +105,14 @@ res_w_gq_vector  <- sampling(stan_w_gq_vector, data = c(stan_data,
                                                         q = 20), iter = niter, chains = nchains, verbose = TRUE, seed = 11)
 print(res_w_gq_vector, pars = c("alpha", "beta", "sigma"))
 print(get_elapsed_time(res_w_gq_vector))
+
+
+#### stan with an 20 array of matrices in the generated quantities block
+stan_w_gq_matrix_V2 <- stan_model("gen_quant/stan_w_gq_matrix_V2.stan")
+res_w_gq_matrix  <- sampling(stan_w_gq_matrix_V2, data = c(stan_data,
+                                                        m = 70,
+                                                        n = 5,
+                                                        p = 20,
+                                                        q = 50), iter = niter, chains = nchains, verbose = TRUE, seed = 11)
+print(res_w_gq_matrix, pars = c("alpha", "beta", "sigma"))
+print(get_elapsed_time(res_w_gq_matrix))
