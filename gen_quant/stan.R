@@ -27,6 +27,13 @@ library(rstan)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
+x <- true_x
+m <- 70
+n <- 5
+p <- 20
+q <- 50
+stan_rdump(c('N', 'y', 'x', 'm', 'n', 'p', 'q'), "gen_quant.data.R")
+
 niter   <- 500
 nchains <- 2
 
