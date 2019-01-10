@@ -32,6 +32,6 @@ model {
     print("log density before =", target());
     y ~ normal(alpha + beta * x, sigma);      
     print("log density after =", target());
-    
+
     print("End model ");
 }
