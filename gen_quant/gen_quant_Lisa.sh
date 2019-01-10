@@ -17,11 +17,17 @@ make build
 
 make $project_dir/gen_quant/stan_wo_gq_inc_Lisa
 
+#Create output directory on scratch
+mkdir "$TMPDIR"/output_dir
+
 export MKL_NUM_THREADS=16
 
 for ((i=1; i<=2 ; i++ )) ; do
 (
-  $project_dir/gen_quant/stan_wo_gq_inc_Lisa sample num_samples=500 num_warmup=500 random seed=1$i output file=$output_dir/output_stan_wo_gq_chain$i.csv
+  $project_dir/gen_quant/stan_wo_gq_inc_Lisa sample num_samples=500 num_warmup=500 random seed=1$i output file="$TMPDIR"/output_dir/output_stan_wo_gq_chain$i.csv
 ) &
 done
 wait
+
+#Copy output directory from scratch to home
+cp -r "$TMPDIR"/output_dir $output_dir
